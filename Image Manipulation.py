@@ -19,7 +19,7 @@ def rotate(img, angle, rotPoint = None):
 
     return cv2.warpAffine(img, rotMat, dimensions)
 
-img = cv2.imread(r'C:\Users\s_p_1\Pictures\Image.jpg')
+img = cv2.imread('..\Photos\cat.jpg')
 
 img = rescale_frame(img)
 
