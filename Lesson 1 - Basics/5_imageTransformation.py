@@ -1,24 +1,26 @@
+
 import cv2
 import numpy as np
 
-img =cv2.imread('..\Photos/park.jpg')
+img =cv2.imread('Images/park.jpg')
 
 cv2.imshow('Park',img)
 
-#translation
-def translate(img,x,y):
-    # -x = Left
-    # -y = Up
-    transMat =np.float32([[1,0,x],[0,1,y]])
+#Translate function
+def translation(img, x, y):
+    #-x = left
+    #-y = up
+    transMat = np.float32([[1,0,x],[0,1,y]])
     dimensions = (img.shape[1],img.shape[0])
 
     return cv2.warpAffine(img,transMat,dimensions)
 
 
-translated = translate(img,100,100)
+#Call the function
+translated = translation(img,100,100)
 cv2.imshow('translated',translated)
 
-#Rotation
+#Rotate
 def rotate(img, angle, rotPoint=None):
     (height,width)=img.shape[:2]
 
@@ -30,24 +32,16 @@ def rotate(img, angle, rotPoint=None):
 
     return cv2.warpAffine(img,rotMat,dimensions)
 
-rotated= rotate(img,-45)
+rotated= rotate(img,-95)
 cv2.imshow('Rotate',rotated)
 
 
-#flipping
 flip=cv2.flip(img,-1)
-#-1 flips vertically and horizonatally 
-
-'''
- A flag to specify how to flip the array; 
- 0 means flipping around the x-axis and 
- positive value (for example, 1) means 
- flipping around y-axis. Negative value
-  (for example, -1) means flipping around 
-  both axes.
-'''
-
-#cropping 
 cropped = img[200:400,200:400]
+
+cv2.imshow('Flipped',flip)
+cv2.imshow('Cropped',cropped)
+
+
 
 cv2.waitKey(0)
