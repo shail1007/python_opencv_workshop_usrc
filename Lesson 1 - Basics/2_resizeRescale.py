@@ -1,44 +1,41 @@
-#Resizing and Rescaling
-
 import cv2
 
-#img = cv2.imread('Photos\cat_large.jpg')
-#cv2.imshow('Cat',img)
+#First function rescales the frame
+def rescaleFrame(frame, scale = 0.25):
 
-def rescale_frame(frame,scale=0.75):
-    #works for images, video and live video
-    width=int(frame.shape[1]*scale)
-    height=int(frame.shape[0]*scale)
+    width = int(frame.shape[1]*scale)
+    height = int(frame.shape[0]*scale)
     dimensions = (width,height)
 
-    return cv2.resize(frame,dimensions,interpolation =cv2.INTER_AREA)
-
-#cv2.waitKey(0)
+    return cv2.resize(frame, dimensions, interpolation=cv2.INTER_AREA)
 
 
-def change_res(width,height):
-    #only works for live video
-    capture.set(3,width) #3 for width
-    capture.set(4,height) #4 for height
+#Second function for changing resolution
+def ChangeRes(width,height):
 
-#reading videos
+    capture.set(3,width)
+    capture.set(4,height)
 
-capture = cv2.VideoCapture('..\Videos\dog.mp4')
-#VideoCapture(0) = Webcam input
 
-#capture=cv2.VideoCapture(0)
+#Read and rescale image
+img = cv2.imread('Images/stock-photo.jpg')
+rescale_img = rescaleFrame(img)
+cv2.imshow('Stock Photo', rescale_img)
+
+#Read vid
+capture = cv2.VideoCapture('Images/fire.mp4')
+
+
 
 while True:
     isTrue,frame=capture.read()
-    
-    #recsale video frame
-    frame_resized=rescale_frame(frame)
 
+    #Rescale
+    frame_resized = rescaleFrame(frame)
 
     cv2.imshow('',frame)
     cv2.imshow('Resized',frame_resized)
 
-    #20 is the delay
     if cv2.waitKey(20) & 0xFF==ord('d'):
         break
 
